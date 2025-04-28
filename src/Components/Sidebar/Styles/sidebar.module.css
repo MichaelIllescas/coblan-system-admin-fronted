@@ -1,0 +1,45 @@
+.sidebar {
+    height: 100vh;
+    background-color: #334170;
+    color: white;
+    border-right: 1px solid #2a345b;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    overflow: hidden;
+  }
+  
+  /* Texto del logo */
+  .logoText {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: white;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    
+  }
+  
+  /* Enlaces */
+  .link {
+    color: #cfd8ff;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+  
+  .link:hover {
+    background-color: #44518c;
+    color: white;
+  }
+  
+  .active {
+    background-color: #1c233a;
+    color: #ffd700;
+  }
+  

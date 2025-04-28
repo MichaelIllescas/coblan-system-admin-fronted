@@ -1,0 +1,12 @@
+/* Footer.module.css */
+.footer {
+    background-color: #334170;  /* Fondo azul */
+    color: #ffffff;  /* Texto blanco */
+    font-size: 0.9rem;  /* Texto pequeño */
+    padding: 15px 0;  /* Espaciado */
+    text-align: center;  /* Centrado */
+    width: 100%;  /* El footer ocupa todo el ancho */
+    position: absolute; /* El footer se coloca en la parte inferior */
+    bottom: 0;
+  }
+  
