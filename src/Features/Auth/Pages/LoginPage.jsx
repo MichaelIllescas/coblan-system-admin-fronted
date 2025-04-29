@@ -1,33 +1,16 @@
-import {useForm} from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup'; //conecto
-import { loginSchema } from '../Validation/loginSchema';
-import { useLogin } from '../Hooks/useLogin';
-import LoginForm from '../Components/LoginForm';
+import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
-    const {handleLogin, errorMessage} =useLogin();
-
-    const {
-        register,
-        handleSubmit,
-        formState: {errors}
-        } = useForm({
-            resolver: yupResolver(loginSchema),  //conectamos yup
-        }); 
-
-        const onSubmit = async (data) => {
-            const { email, password } = data;
-            await handleLogin(email, password); 
-          };
-        
-
-return (
-    <LoginForm
-    register={register}
-    handleSubmit={handleSubmit(onSubmit)} // conecta validacion + logica
-    errors={errors}
-    errorMessage={errorMessage} // mensaje de error
-    />
-);
+    return (
+        <div className="container my-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6 col-lg-4">
+                   
+                    <LoginForm />
+                </div>
+            </div>
+        </div>
+    );
 };
+
 export default LoginPage;

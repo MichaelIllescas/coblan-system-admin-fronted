@@ -1,5 +1,5 @@
 .sidebar {
-    height: 100vh;
+   min-height: 100vh;
     background-color: #334170;
     color: white;
     border-right: 1px solid #2a345b;
@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     z-index: 100;
-    overflow: hidden;
+   
   }
   
   /* Texto del logo */

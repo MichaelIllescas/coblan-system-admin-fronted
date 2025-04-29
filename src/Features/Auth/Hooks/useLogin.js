@@ -1,26 +1,20 @@
-import { useNavigate } from 'react-router-dom';
-import apiClient from '../../../Services/apiClient'; // Asegúrate de que la ruta sea correcta
 import { useState } from 'react';
-export const useLogin=()=>{
-const navigate = useNavigate();
-const [errorMessage, setErrorMessage] = useState('');
-const handleLogin = async (email, password) =>{
-    try {
-        const response = await apiClient.post('/auth/login', {
-            email,
-            password,
-        });
+import { useNavigate } from 'react-router-dom';
+import { login } from '../Service/authService';
 
-    const user=response.data;
-    localStorage.setItem('user', JSON.stringify(user));
+export const useLogin = () => {
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
 
-    // redireccion al dashbaard 
-    navigate('/');
-    } catch (error) {
-        const message = error.response?.data?.message || 'Login faliido';
-      setErrorMessage(message);
-    }
+    const handleLogin = async (email, password) => {
+        try {
+            const user = await login(email, password);
+            navigate('/dashboard');
+        } catch (error) {
+            const message = error.response?.data?.message || 'Error al iniciar sesión';
+            setErrorMessage(message);
+        }
+    };
+
+    return { handleLogin, errorMessage };
 };
- return {handleLogin, errorMessage};
-};
-

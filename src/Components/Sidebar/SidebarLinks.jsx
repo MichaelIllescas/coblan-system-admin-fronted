@@ -154,11 +154,7 @@ export const sidebarLinks = [
         icon: <UserPlus size={18} />,
       },
       { path: "/users/list", label: "Lisado De Usuarios", icon: <List size={18} /> },
-      {
-        path: "/users/inactives",
-        label: "Usuarios Inactivos",
-        icon: <Ban size={18} />,
-      },
+     
     ],
   },
 ];

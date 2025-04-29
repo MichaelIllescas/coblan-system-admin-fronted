@@ -1,19 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useLogout } from "../../../Features/Auth/Hooks/useLogout";
+import { useLogout } from '../../../Features/Auth/Hooks/useLogout';
 import styles from "../Styles/Navbar.module.css";
 
 const UserProfileDropDown = () => {
-  const { handleLogout, Loader } = useLogout();
+  const { handleLogout, isLoading } = useLogout();
 
   // Simulación: imagen que viene del usuario
   const userPhotoUrl = ""; // VACÍO para probar que funcione el círculo gris
 
   const hasValidImage = userPhotoUrl && userPhotoUrl.trim() !== "";
-
+  {isLoading && <div>...mostrar spinner aquí si querés...</div>}
   return (
     <>
-      <Loader />
       <div className="dropdown ms-auto">
         <button
           className={`btn dropdown-toggle ${styles.dropdownButton} d-flex align-items-center`}
