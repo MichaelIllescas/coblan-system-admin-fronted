@@ -28,11 +28,18 @@ function useForm(initialValues, validateOnSubmit) {
         callback(formData);
     };
 
+    const resetForm = () => {
+        setFormData(initialValues);
+        setErrors({});
+    };
+
+
     return {
         formData,
         errors,
         handleChange,
         handleSubmit,
+        resetForm
     };
 }
 
