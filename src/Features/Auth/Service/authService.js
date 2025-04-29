@@ -1,7 +1,10 @@
 import apiClient from "../../../Services/apiClient";
 
+
+
 // 🔹 Función para iniciar sesión
 const login = async (email, password) => {
+ 
   const response =await apiClient.post(
     `/auth/login`,
     { email, password },

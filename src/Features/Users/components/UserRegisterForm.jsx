@@ -22,6 +22,7 @@ const UserRegisterForm = ({ onSubmit }) => {
     const togglePassword = () => setShowPassword(!showPassword);
 
     const onFinalSubmit = (data, reset) => {
+        // eslint-disable-next-line no-unused-vars
         const { repeatPassword, ...dataToSend } = data;
         onSubmit(dataToSend, reset);
     };

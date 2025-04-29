@@ -1,14 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../Service/authService';
+import { useAuth } from '../../../Context/AuthContext';
 
 export const useLogin = () => {
+
+    const { loginUser } = useAuth(); 
+
+
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = async (email, password) => {
         try {
-            const user = await login(email, password);
+            
+            await loginUser(email, password);
             navigate('/dashboard');
         } catch (error) {
             const message = error.response?.data?.message || 'Error al iniciar sesión';
