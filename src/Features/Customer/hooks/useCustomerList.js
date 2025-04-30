@@ -1,4 +1,3 @@
-// hooks/useCustomerList.js
 import { useEffect, useState } from 'react';
 import { getAllCustomers } from '../services/getAllCustomersService';
 
@@ -7,22 +6,27 @@ const useCustomerList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCustomers = async () => {
-      try {
-        const data = await getAllCustomers();
-        setCustomers(data);
-      } catch (err) {
-        setError(err.message || 'Error al obtener los clientes');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchCustomers = async () => {
+    try {
+      const data = await getAllCustomers();
+      setCustomers(data);
+    } catch (err) {
+      setError(err.message || 'Error al obtener los clientes');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchCustomers();
   }, []);
 
-  return { customers, loading, error };
+  return {
+    customers,
+    loading,
+    error,
+    refetch: fetchCustomers, // 🔁 <- esto te lo llevás al componente
+  };
 };
 
 export default useCustomerList;

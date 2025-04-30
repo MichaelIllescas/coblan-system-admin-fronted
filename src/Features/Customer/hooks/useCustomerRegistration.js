@@ -1,25 +1,22 @@
-import { useState } from 'react';
 import { registerCustomer } from '../services/customerService';
+import { showSuccessAlert, showErrorAlert } from '../../../Components/Alerts/alerts';
 
-export const useCustomerRegistration = () => {
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null);
 
-    const handleRegisterCustomer = async (formData, resetForm) => {
-        try {
-            await registerCustomer(formData);
-            setSuccessMessage('Cliente registrado exitosamente');
-            setErrorMessage(null);
-            resetForm();
-        } catch (error) {
-            setErrorMessage(error.response?.data?.message || 'Ocurrió un error');
-            setSuccessMessage(null);
-        }
-    };
 
-    return {
-        handleRegisterCustomer,
-        errorMessage,
-        successMessage,
-    };
+ export const useCustomerRegistration = () => {
+  const handleRegisterCustomer = async (formData, resetForm) => {
+    try {
+      await registerCustomer(formData);
+      showSuccessAlert('Éxito', 'Cliente registrado correctamente');
+      if (resetForm) resetForm(); 
+    } catch (err) {
+      const backendMessage =
+        err?.response?.data?.error ||
+        err?.response?.data?.message ||
+        'No se pudo registrar el cliente';
+      showErrorAlert('Error', backendMessage);
+    }
+  };
+
+  return { handleRegisterCustomer };
 };

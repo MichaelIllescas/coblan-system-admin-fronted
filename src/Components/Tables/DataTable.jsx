@@ -6,6 +6,8 @@ import {
   useSortBy,
 } from "react-table";
 
+import '../Tables/styles.css'
+
 // Componente de Búsqueda Global
 function GlobalFilter({ globalFilter, setGlobalFilter }) {
   return (
@@ -13,7 +15,7 @@ function GlobalFilter({ globalFilter, setGlobalFilter }) {
       value={globalFilter || ""}
       onChange={(e) => setGlobalFilter(e.target.value || undefined)}
       placeholder="Buscar..."
-      className="form-control mb-3"
+      className="form-control mb-3 input-filter"
     />
   );
 }

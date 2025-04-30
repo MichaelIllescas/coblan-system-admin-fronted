@@ -3,7 +3,6 @@ import DataTable from '../../../Components/Tables/DataTable';
 import useUsersList from '../hooks/useUsersList';
 import { FaEdit } from 'react-icons/fa';
 import { MdEdit, MdDelete } from 'react-icons/md';
-import { col } from 'framer-motion/client';
 
 
 const ListUsersPage = () => {
