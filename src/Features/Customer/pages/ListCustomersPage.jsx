@@ -10,11 +10,11 @@ import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
 import { useState } from "react";
 import useConfirmCustomerDelete from "../hooks/useConfirmCustomerDelete";
 
-import useCustomerDelete from "../hooks/useCustomerDelete";
 
 const ListCustomersPage = () => {
   const { customers, loading, error, refetch } = useCustomerList();
   const { selectedItem, modalVisible, openModal, closeModal } = useEditModal();
+  // eslint-disable-next-line no-unused-vars
   const { handleUpdate, loading: updating } = useCustomerUpdate();
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [customerToDelete, setCustomerToDelete] = useState(null);

@@ -25,7 +25,7 @@ const useCustomerList = () => {
     customers,
     loading,
     error,
-    refetch: fetchCustomers, // 🔁 <- esto te lo llevás al componente
+    refetch: fetchCustomers, 
   };
 };
 
