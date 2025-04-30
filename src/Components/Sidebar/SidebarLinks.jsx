@@ -26,12 +26,8 @@ export const sidebarLinks = [
         label: "Nuevo Cliente",
         icon: <UserPlus size={18} />,
       },
-      { path: "/clients/list", label: "Listado De Clientes", icon: <List size={18} /> },
-      {
-        path: "/clients/inactives",
-        label: "Clientes Inactivos",
-        icon: <Ban size={18} />,
-      },
+      { path: "/customersList", label: "Listado De Clientes", icon: <List size={18} /> },
+      
     ],
   },
   {
@@ -44,7 +40,7 @@ export const sidebarLinks = [
         icon: <UserPlus size={18} />,
       },
       {
-        path: "/employees/list",
+        path: "/employeesList",
         label: "Listado De Empleados",
         icon: <List size={18} />,
       },
@@ -62,7 +58,7 @@ export const sidebarLinks = [
         icon: <DollarSign size={18} />,
       },
       {
-        path: "/expenses/list",
+        path: "/expensesList",
         label: "Listado De Gastos",
         icon: <List size={18} />,
       },
@@ -134,7 +130,7 @@ export const sidebarLinks = [
         icon: <PlusCircle size={18} />,
       },
       {
-        path: "/services/list",
+        path: "/servicesList",
         label: "Listado De Servicios",
         icon: <List size={18} />,
       },
@@ -149,7 +145,7 @@ export const sidebarLinks = [
         label: "Crear Usuario",
         icon: <UserPlus size={18} />,
       },
-      { path: "/users/list", label: "Lisado De Usuarios", icon: <List size={18} /> },
+      { path: "/usersList", label: "Lisado De Usuarios", icon: <List size={18} /> },
      
     ],
   },

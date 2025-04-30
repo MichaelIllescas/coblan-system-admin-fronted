@@ -42,4 +42,10 @@
     background-color: #1c233a;
     color: #ffd700;
   }
-  
+  .arrow{
+    background-color: #fff !important;
+    border-radius: 100px !important;
+    padding: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+  }

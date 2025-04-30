@@ -120,7 +120,7 @@
   .table {
     background-color: white;
     border-collapse: collapse;
-    width: 100%;
+    /* width: 100%; */
   }
   
   .table th,
@@ -133,6 +133,17 @@
   .table thead {
     background-color: var(--secondary-color);
     color: white;
+  }
+
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
+  }
+  
+  .table-container table {
+    min-width: 600px;
+    width: 100%;
   }
   
   /* ======== Sombras suaves ======== */

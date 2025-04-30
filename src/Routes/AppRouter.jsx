@@ -8,6 +8,11 @@ import EmployeeRegistrationPage from "../Features/Employee/pages/EmployeeRegistr
 import ExpenseRegisterPage from "../Features/Expenses/pages/ExpenseRegisterPage";
 import ServiceRegisterPage from "../Features/Services/pages/ServiceRegisterPage";
 import UserRegisterPage from "../Features/Users/pages/UserRegisterPage";
+import ListCustomersPage from "../Features/Customer/pages/ListCustomersPage";
+import ListEmployeesPage from "../Features/Employee/pages/ListEmployeesPage";
+import ListExpensesPage from "../Features/Expenses/pages/ListExpensesPage";
+import ListServicesPage from "../Features/Services/pages/ListServicesPage";
+import ListUsersPage from "../Features/Users/pages/ListUsersPage";
 
 
 export const AppRoutes = () => {
@@ -23,14 +28,19 @@ export const AppRoutes = () => {
       
       {/* Rutas protegidas dentro de MainLayout */}
       <Route path="/customerRegister" element={<ProtectedRoute element={<RegisterCustomerPage />} />} /> 
+      <Route path="/customersList" element={<ProtectedRoute element={<ListCustomersPage />} />} /> 
 
       <Route path="/employeeRegister" element={<ProtectedRoute element={<EmployeeRegistrationPage />} />} /> 
+      <Route path="/employeesList" element={<ProtectedRoute element={<ListEmployeesPage />} />} /> 
 
       <Route path="/expenses/create" element={<ProtectedRoute element={<ExpenseRegisterPage />} />} /> 
+      <Route path="/expensesList" element={<ProtectedRoute element={<ListExpensesPage />} />} /> 
 
       <Route path="/services/create" element={<ProtectedRoute element={<ServiceRegisterPage />} />} /> 
+      <Route path="/servicesList" element={<ProtectedRoute element={<ListServicesPage />} />} /> 
 
       <Route path="/users/create" element={<ProtectedRoute element={<UserRegisterPage />} />} /> 
+      <Route path="/usersList" element={<ProtectedRoute element={<ListUsersPage />} />} /> 
 
       {/* users managenent */}
 

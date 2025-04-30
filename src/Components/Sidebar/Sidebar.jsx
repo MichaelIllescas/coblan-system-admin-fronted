@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight} from 'lucide-react';
 import { sidebarLinks } from '../Sidebar/SidebarLinks.jsx';
-import styles from './Styles/Sidebar.module.css'
+import styles from './Styles/sidebar.module.css'
 import  useSidebarToggle  from './Hooks/useSidebarToggle';
 import { motion} from 'framer-motion';
 import useSidebarMenu from './Hooks/useSidebarMenu';
@@ -23,7 +23,7 @@ const Sidebar =() =>{
         <div className="d-flex justify-content-between align-items-center px-3 py-3">
        <motion.button
        onClick={toggleSidebar}
-       className='btn btn-sm btn-light'
+       className={`${styles.arrow} btn btn-sm `}
        aria-label="Toggle Sidebar"
         animate={arrowToggleAnimation(isOpen)}
         whileHover={hoverButton.whileHover}

@@ -1,0 +1,9 @@
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  .table-container table {
+    min-width: 600px;
+  }
+  
