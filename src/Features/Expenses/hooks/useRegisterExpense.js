@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { registerExpense } from '../services/ExpenseRegisterService';
+import { showSuccessAlert } from '../../../Components/Alerts/alerts';
 
 export const useRegisterExpense = () => {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -8,7 +9,8 @@ export const useRegisterExpense = () => {
     const handleRegisterExpense = async (formData, resetForm) => {
         try {
             await registerExpense(formData);
-            setSuccessMessage('Gasto registrado exitosamente');
+          
+            showSuccessAlert('Éxito', 'Gasto registrado exitosamente');
             setErrorMessage(null);
             resetForm();
         } catch (error) {

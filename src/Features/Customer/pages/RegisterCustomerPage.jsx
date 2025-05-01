@@ -9,9 +9,12 @@ const RegisterCustomerPage = () => {
   return (
     <div className="container mt-4">
       <h2 className="text-center mb-4 text-white">Registrar Cliente</h2>
+     
+
       <CustomerRegisterForm
         onSubmit={(data, resetForm) => handleRegisterCustomer(data, resetForm)}
       />
+     
     </div>
   );
 };

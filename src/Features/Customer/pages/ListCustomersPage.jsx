@@ -6,7 +6,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import EditCustomerModal from "../components/EditCustomerModal";
 import useEditModal from "../../../hooks/useEditModal";
 import useCustomerUpdate from "../hooks/useCustomerUpdate";
-import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import ConfirmDeleteModal from "../../../Components/Modals/ConfirmDeleteModal";
 import { useState } from "react";
 import useConfirmCustomerDelete from "../hooks/useConfirmCustomerDelete";
 

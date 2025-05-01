@@ -16,7 +16,7 @@ const CustomerRegisterForm = ({ onSubmit }) => {
   );
 
   return (
-    <div className="card shadow-lg border-0 p-4 col-lg-6 col-md-6 col-sm-8 m-auto">
+    <div className="card shadow-lg border-0 p-4 col-lg-6 col-md-6 col-sm-8 m-auto mb-3">
       <form
         onSubmit={(e) => handleSubmit(() => onSubmit(formData, resetForm))(e)}
         noValidate

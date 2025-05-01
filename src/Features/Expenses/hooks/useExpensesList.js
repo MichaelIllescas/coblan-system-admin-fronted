@@ -7,7 +7,7 @@ const useExpensesList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  
     const fetchExpenses = async () => {
       try {
         const data = await getAllExpenses();
@@ -19,10 +19,11 @@ const useExpensesList = () => {
       }
     };
 
-    fetchExpenses();
-  }, []);
+      useEffect(() => {
+        fetchExpenses();
+      }, []);
 
-  return { expenses, loading, error };
+  return { expenses, loading, error,  refetch: fetchExpenses,  };
 };
 
 export default useExpensesList;

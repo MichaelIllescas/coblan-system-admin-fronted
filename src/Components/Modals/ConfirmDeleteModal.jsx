@@ -1,5 +1,5 @@
 import React from 'react';
-import GenericModal from '../../../Components/Modals/GenericModal';
+import GenericModal from '../Modals/GenericModal';
 
 /**
  * Modal de confirmación para acciones destructivas como eliminar.
