@@ -1,4 +1,4 @@
-function validateUserForm(values) {
+function validateUpdateForm(values) {
     const errors = {};
 
     if (!values.firstName.trim()) {
@@ -31,17 +31,7 @@ function validateUserForm(values) {
         errors.email = 'El correo electrónico no es válido.';
     }
 
-    if (!values.password.trim()) {
-        errors.password = 'La contraseña es obligatoria.';
-    } else if (values.password.length < 6) {
-        errors.password = 'Debe tener al menos 6 caracteres.';
-    }
 
-    if (!values.repeatPassword.trim()) {
-        errors.repeatPassword = 'Debe repetir la contraseña.';
-    } else if (values.password !== values.repeatPassword) {
-        errors.repeatPassword = 'Las contraseñas no coinciden.';
-    }
     if (!values.role.trim()) {
         errors.role = 'El rol es obligarorio.';
     } 
@@ -49,4 +39,4 @@ function validateUserForm(values) {
     return errors;
 }
 
-export default validateUserForm;
+export default validateUpdateForm;

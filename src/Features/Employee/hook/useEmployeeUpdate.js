@@ -21,7 +21,6 @@ const useEmployeeUpdate = () => {
         `Los datos de ${updatedData.firstName} se guardaron correctamente`
       );
     } catch (err) {
-      console.error('Error actualizando empleado', err);
       showErrorAlert(
         'Error',
         err.response?.data?.error || 'No se pudo actualizar el empleado'

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DataTable from '../../../Components/Tables/DataTable';
 import useUsersList from '../hooks/useUsersList';
 import { FaEdit } from 'react-icons/fa';
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete, MdToggleOn, MdToggleOff } from 'react-icons/md';
+import ConfirmModal from "../../../Components/Modals/ConfirmModal";
+import useUserStatusToggle from "../hooks/useUserToggleStatus";
+import useEditModal from '../../../hooks/useEditModal';
+import useUserUpdate from '../hooks/useUserUpdate';
+import EditEmployeeModal from '../../Employee/components/EditEmployeeModal';
+import EditUserModal from '../components/EditUserModal';
 
 
 const ListUsersPage = () => {
-  const { users, loading, error } = useUsersList();
+  const { users, loading, error, refetch } = useUsersList();
+  const [statusModalVisible, setStatusModalVisible] = useState(false);
+  const [userToToggle, setUserToToggle] = useState(null);
+  const { selectedItem, modalVisible, openModal, closeModal } = useEditModal();
+  const { handleUpdate } = useUserUpdate();
+  const { handleToggleStatus } = useUserStatusToggle(refetch);
 
   const columns = [
     { Header: 'ID', accessor: 'id' },
@@ -28,17 +39,24 @@ const ListUsersPage = () => {
       Cell: ({ row }) => (
         <div className="d-flex justify-content-center gap-2">
           <button
-            className="btn btn-sm btn-warning"
-            onClick={() => alert(`Editar cliente ID: ${row.original.id}`)}
+            className="btn btn-sm btn-action"
+            onClick={() => openModal(row.original)}
           >
            <FaEdit  size={20}/>
 
           </button>
           <button
-            className="btn btn-sm btn-danger"
-            onClick={() => alert(`Eliminar cliente ID: ${row.original.id}`)}
+            className="btn btn-sm btn-action"
+            onClick={() => {
+              setUserToToggle(row.original);
+              setStatusModalVisible(true);
+            }}
           >
-           <MdDelete size={20} />
+           {row.original.enabled ? (
+                         <MdToggleOn size={22} color="green" />
+                       ) : (
+                         <MdToggleOff size={22} color="gray" />
+                       )}
           </button>
         </div>
       ),
@@ -57,6 +75,41 @@ const ListUsersPage = () => {
           <DataTable columns={columns} data={users} />
         </div>
       )}
+<EditUserModal
+        show={modalVisible}
+        onClose={closeModal}
+        user={selectedItem}
+        onConfirm={(data) =>
+          handleUpdate({
+            updatedData: data,
+            onSuccess: refetch,
+            onClose: closeModal,
+          })
+        }
+      />
+      
+<ConfirmModal
+        show={statusModalVisible}
+        onClose={() => {
+          setStatusModalVisible(false);
+          setUserToToggle(null);
+        }}
+        title="¿Cambiar estado?"
+        message={`¿Estás seguro de que querés ${
+          userToToggle?.enabled ? "desactivar" : "activar"
+        } a ${userToToggle?.firstName} ${userToToggle?.lastName}?`}
+        confirmText="Sí, confirmar"
+        onConfirm={() =>
+          handleToggleStatus({
+            user: userToToggle,
+            onSuccess: refetch,
+            onClose: () => {
+              setStatusModalVisible(false);
+              setUserToToggle(null);
+            }
+          })
+        }
+      />
     </div>
   );
 };

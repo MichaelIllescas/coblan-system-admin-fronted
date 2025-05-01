@@ -5,7 +5,7 @@ import useEditModal from "../../../hooks/useEditModal";
 import useEmployeeUpdate from "../hook/useEmployeeUpdate";
 import useEmployeeStatusToggle from "../hook/useEmployeeStatusToggle";
 import EditEmployeeModal from "../components/EditEmployeeModal";
-import ConfirmModal from "../components/ConfirmModal";
+import ConfirmModal from "../../../Components/Modals/ConfirmModal";
 import { FaEdit } from "react-icons/fa";
 import { MdToggleOn, MdToggleOff } from "react-icons/md";
 

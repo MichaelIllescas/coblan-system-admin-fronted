@@ -17,7 +17,7 @@ export const useLogin = () => {
             await loginUser(email, password);
             navigate('/dashboard');
         } catch (error) {
-            const message = error.response?.data?.message || 'Error al iniciar sesión';
+            const message = error.response?.data?.error || 'Error al iniciar sesión';
             setErrorMessage(message);
         }
     };

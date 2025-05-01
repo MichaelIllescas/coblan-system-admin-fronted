@@ -7,7 +7,7 @@ const useUsersList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  
     const fetchUsers = async () => {
       try {
         const data = await getAllUsers();
@@ -18,11 +18,11 @@ const useUsersList = () => {
         setLoading(false);
       }
     };
-
+  useEffect(() => {
     fetchUsers();
   }, []);
 
-  return { users, loading, error };
+  return { users, loading, error, refetch: fetchUsers};
 };
 
 export default useUsersList;
