@@ -7,7 +7,7 @@ const useServicesList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+ 
     const fetchServices = async () => {
       try {
         const data = await getAllServices();
@@ -18,11 +18,11 @@ const useServicesList = () => {
         setLoading(false);
       }
     };
-
+useEffect(() => {
     fetchServices();
   }, []);
 
-  return { services, loading, error };
+  return { services, loading, error, refetch:fetchServices };
 };
 
 export default useServicesList;

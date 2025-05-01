@@ -13,7 +13,7 @@ const ServiceRegisterForm = ({ onSubmit }) => {
     );
 
     return (
-        <div className="card shadow-lg border-0 p-4 col-lg-6 col-md-8 col-sm-10 m-auto">
+        <div className="card shadow-lg border-0 p-4 col-lg-6 col-md-8 col-sm-10 m-auto mb-3">
             <form onSubmit={handleSubmit((formData) => onSubmit(formData, resetForm))} noValidate>
 
                 {/* Nombre del servicio */}
