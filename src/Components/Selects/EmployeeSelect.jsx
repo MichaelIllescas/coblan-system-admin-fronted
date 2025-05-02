@@ -2,23 +2,22 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { fetchEmployees } from './employeeService';
 
-const EmployeeSelect = ({ onSelect }) => {
+const EmployeeSelect = ({ onSelect, value }) => {
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null); 
 
   useEffect(() => {
     fetchEmployees().then(data => {
       const formattedOptions = data.map(emp => ({
         value: emp.id,
         label: `${emp.firstName} ${emp.lastName}`,
+        raw: emp
       }));
       setOptions(formattedOptions);
     });
   }, []);
 
   const handleChange = (option) => {
-    setSelectedOption(option); 
-    onSelect(option ? option.value : null);
+    onSelect(option);
   };
 
   return (
@@ -26,7 +25,7 @@ const EmployeeSelect = ({ onSelect }) => {
       <label className="form-label">Empleado</label>
       <Select
         options={options}
-        value={selectedOption} 
+        value={value} // 👈 Esto lo controla desde el hook
         onChange={handleChange}
         placeholder="Seleccione un empleado"
         isClearable
@@ -34,5 +33,6 @@ const EmployeeSelect = ({ onSelect }) => {
     </div>
   );
 };
+
 
 export default EmployeeSelect;

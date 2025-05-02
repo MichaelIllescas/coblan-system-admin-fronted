@@ -69,7 +69,7 @@ export const sidebarLinks = [
     icon: <Briefcase size={20} />,
     children: [
       {
-        path: "/hiring/create",
+        path: "/hiring/register",
         label: "Nueva Contratacion",
         icon: <UserPlus size={18} />,
       },

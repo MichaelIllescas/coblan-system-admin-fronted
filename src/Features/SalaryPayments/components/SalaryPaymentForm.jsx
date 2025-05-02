@@ -8,15 +8,15 @@ const SalaryPaymentForm = () => {
     errors,
     handleChange,
     handleSubmit,
-    resetForm,
-    handleSelectEmployee
+    handleSelectEmployee,
+    selectedEmployee
   } = useSalaryPaymentForm();
 
   return (
     <form onSubmit={handleSubmit} noValidate className="card p-4 shadow-lg border-0 col-lg-6 col-sm-12 m-auto mb-3" >
    
 
-      <EmployeeSelect onSelect={handleSelectEmployee} />
+      <EmployeeSelect onSelect={handleSelectEmployee}  value={selectedEmployee} />
       {errors.employeeId && <div className="text-danger">{errors.employeeId}</div>}
 
       <div className="mb-3">
