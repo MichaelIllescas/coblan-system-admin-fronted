@@ -14,7 +14,7 @@ const useHiringWorkHours = () => {
       setWorkHours(data);
       
     } catch (err) {
-      setError("No se pudieron cargar las horas trabajadas.");
+      setError("No se pudieron cargar las horas trabajadas." + err);
     } finally {
       setLoading(false);
     }

@@ -17,6 +17,8 @@ import RegisterSalaryPaymentPage from "../Features/SalaryPayments/pages/Register
 import ListSalaryPage from '../Features/SalaryPayments/pages/ListSalarysPage';
 import HiringRegisterPage from "../Features/Hirings/pages/HiringRegisterPage";
 import ListHiringsPage from "../Features/Hirings/pages/ListHiringPage";
+import ListHiringsMontly from "../Features/Hirings/pages/ListHiringsMontly";
+import WorkHoursPage from "../Features/Hirings/pages/WorkHoursPage";
 
 export const AppRoutes = () => {
   const { user } = useAuth();
@@ -50,8 +52,10 @@ export const AppRoutes = () => {
 
       <Route path="/hiring/register" element={<ProtectedRoute element={<HiringRegisterPage />} />} /> 
       <Route path="/hiring/list" element={<ProtectedRoute element={<ListHiringsPage />} />} /> 
+      <Route path="/hiring/listMonthly" element={<ProtectedRoute element={<ListHiringsMontly />} />} /> 
 
-      
+      <Route path="/hirings/:hiringId/hours" element={<ProtectedRoute element={<WorkHoursPage />} />} />
+
 
       {/* users managenent */}
 

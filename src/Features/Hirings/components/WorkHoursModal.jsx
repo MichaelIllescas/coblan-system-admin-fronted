@@ -9,11 +9,6 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = workHours.slice(startIndex, startIndex + itemsPerPage);
 
-  const formatDuration = (duration) => {
-    const minutes = Math.floor(duration / 60);
-    const seconds = duration % 60;
-    return `${minutes} min ${seconds} seg`;
-  };
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -72,7 +67,7 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
                 <tr>
                   <th>Fecha</th>
                   <th>Hora</th>
-                  <th>Duración</th>
+                  <th>Duración (Mins.)</th>
                   <th>Tipo</th>
                   <th>Estado</th>
                   <th>Empleado</th>
@@ -84,8 +79,8 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
                   <tr key={hour.id}>
                     <td>{hour.date}</td>
                     <td>{hour.hour}</td>
-                    <td>{formatDuration(hour.duration)}</td>
-                    <td>{hour.type == "CANCELLED" ? "Cancelada" : "Activa"}</td>
+                    <td className="text-center">{hour.duration}</td>
+                    <td>{hour.type}</td>
                     <td>
                       {hour.status === "PENDING"
                         ? "Pendiente"

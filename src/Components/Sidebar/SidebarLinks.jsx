@@ -73,7 +73,8 @@ export const sidebarLinks = [
         label: "Nueva Contratacion",
         icon: <UserPlus size={18} />,
       },
-      { path: "/hiring/list", label: "Listado De Contrataciones", icon: <List size={18} /> },
+      { path: "/hiring/list", label: "Listado General", icon: <List size={18} /> },
+      { path: "/hiring/listMonthly", label: "Listado Mensual", icon: <List size={18} /> },
       {
         path: "/hiring/pending-hours",
         label: "Horas Pendientes",

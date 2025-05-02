@@ -37,16 +37,7 @@ const ListHiringsPage = () => {
   const columns = [
     { Header: "ID", accessor: "id" },
     { Header: "Fecha de Inicio", accessor: "startDate" },
-    {
-        Header: "Estado",
-        accessor: "status",
-        Cell: ({ value }) => {
-          if (value === 'ACTIVE') return 'Activa';
-          if (value === 'CANCELLED') return 'Cancelada';
-          return value; 
-        
-      }
-     } ,
+    
     { Header: "Cliente", accessor: "customerName" },
     { Header: "Servicio", accessor: "serviceName" },
     { Header: "Empleado", accessor: "employeeName" },
@@ -56,6 +47,16 @@ const ListHiringsPage = () => {
         accessor: "schedule",
         Cell: ({ value }) => <span>{formatSchedule(value)}</span>
       },
+      {
+        Header: "Estado",
+        accessor: "status",
+        Cell: ({ value }) => {
+          if (value === 'ACTIVE') return 'Activa';
+          if (value === 'CANCELLED') return 'Cancelada';
+          return value; 
+        
+      }
+     } ,
     
     {
       Header: "Acciones",
