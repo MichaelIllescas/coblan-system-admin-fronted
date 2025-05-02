@@ -1,13 +1,22 @@
-import React, { useState } from "react";
 import DataTable from "../../../Components/Tables/DataTable";
 import useHiringList from "../hooks/useHiringList";
-
-import { FaEdit } from "react-icons/fa";
+import ConfirmModal from "../../../Components/Modals/ConfirmModal";
+import { FaEdit, FaEye  } from "react-icons/fa";
 import { MdToggleOn, MdToggleOff } from "react-icons/md";
+import { useState } from "react";
+import useCancelHiring from "../hooks/useCancelHiring";
+import WorkHoursModal from '../components/WorkHoursModal'
+import useHiringWorkHours from "../hooks/useHiringWorkHours";
 
 const ListHiringsPage = () => {
-  const { hirings, loading, error, refetch } = useHiringList();
-  
+  const { hirings, loading, error , refetch} = useHiringList();
+  const [workHoursModalVisible, setWorkHoursModalVisible] = useState(false);
+  const [statusModalVisible, setStatusModalVisible] = useState(false);
+  const [hiringSelected, sethiringSelected] = useState(null);
+  const { handleCancel} = useCancelHiring();
+  const {workHours,loading: loadingHours, error: errorHours, fetchWorkHours} = useHiringWorkHours();
+  const [selectedHiringId, setSelectedHiringId] = useState(null);
+
   const dayLabels = {
     MONDAY: 'Lunes',
     TUESDAY: 'Martes',
@@ -56,16 +65,24 @@ const ListHiringsPage = () => {
         <div className="d-flex justify-content-center gap-2">
           <button
             className="btn btn-sm btn-action"
-            onClick={() => {}}
+            onClick={() => {
+              const id = row.original.id;
+              setSelectedHiringId(id);
+              fetchWorkHours(id);
+              setWorkHoursModalVisible(true);
+            }}
           >
-            <FaEdit size={20} />
+          <FaEye size={20} />
           </button>
           <button
             className="btn btn-sm btn-action"
             onClick={() => {
+              if(row.original.status == 'CANCELLED') return;
+              sethiringSelected(row.original);
+              setStatusModalVisible(true);
             }}
           >
-            {row.original.active ? (
+            {row.original.status == 'ACTIVE' ? (
               <MdToggleOn size={22} color="green" />
             ) : (
               <MdToggleOff size={22} color="gray" />
@@ -89,7 +106,33 @@ const ListHiringsPage = () => {
         </div>
       )}
 
+<ConfirmModal
+        show={statusModalVisible}
+        onClose={() => {
+          setStatusModalVisible(false);
+          sethiringSelected(null);
+        }}
+        title="¿Desea Anular?"
+        message={`¿Estás seguro de que querés Anular la contratacion ?`}
+        confirmText="Sí, confirmar"
+        onConfirm={() =>
+          handleCancel({
+            hiringSelected: hiringSelected,
+            onSuccess: refetch,
+            onClose: () => {
+              setStatusModalVisible(false);
+              sethiringSelected(null);
+            }
+          })
+        }
+      />
 
+<WorkHoursModal
+  show={workHoursModalVisible}
+  onClose={() => setWorkHoursModalVisible(false)}
+  workHours={workHours}
+  hiringId={selectedHiringId}
+/>
      
    
     </div>
