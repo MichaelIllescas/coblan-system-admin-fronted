@@ -1,10 +1,5 @@
 import { useState } from 'react';
 
-/**
- * Hook personalizado para manejar formularios.
- * @param {Object} initialValues Valores iniciales del formulario
- * @param {Function} validateOnSubmit Función de validación que recibe los valores
- */
 function useForm(initialValues, validateOnSubmit) {
     const [formData, setFormData] = useState(initialValues);
     const [errors, setErrors] = useState({});

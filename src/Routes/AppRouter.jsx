@@ -13,7 +13,8 @@ import ListEmployeesPage from "../Features/Employee/pages/ListEmployeesPage";
 import ListExpensesPage from "../Features/Expenses/pages/ListExpensesPage";
 import ListServicesPage from "../Features/Services/pages/ListServicesPage";
 import ListUsersPage from "../Features/Users/pages/ListUsersPage";
-
+import RegisterSalaryPaymentPage from "../Features/SalaryPayments/pages/RegisterSalaryPaymentPage";
+import ListSalaryPage from '../Features/SalaryPayments/pages/ListSalarysPage';
 
 export const AppRoutes = () => {
   const { user } = useAuth();
@@ -41,6 +42,11 @@ export const AppRoutes = () => {
 
       <Route path="/users/create" element={<ProtectedRoute element={<UserRegisterPage />} />} /> 
       <Route path="/usersList" element={<ProtectedRoute element={<ListUsersPage />} />} /> 
+
+      <Route path="/salary/register" element={<ProtectedRoute element={<RegisterSalaryPaymentPage />} />} /> 
+      <Route path="/salary/list" element={<ProtectedRoute element={<ListSalaryPage />} />} /> 
+
+
 
       {/* users managenent */}
 

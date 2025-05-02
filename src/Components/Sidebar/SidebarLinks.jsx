@@ -108,7 +108,7 @@ export const sidebarLinks = [
     icon: <DollarSign size={20} />,
     children: [
       {
-        path: "/salary/create",
+        path: "/salary/register",
         label: "Nuevo Pago Salario",
         icon: <PlusCircle size={18} />,
       },

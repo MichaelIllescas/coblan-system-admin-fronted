@@ -22,7 +22,7 @@ const useEmployeesList = () => {
     fetchEmployees();
   }, []);
 
-  return { employees, loading, error, refetch: fetchEmployees };
+  return { employees, loading, error, refetch: fetchEmployees, fetchEmployees };
 };
 
 export default useEmployeesList;
