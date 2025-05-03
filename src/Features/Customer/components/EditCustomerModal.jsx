@@ -17,6 +17,7 @@ const EditCustomerModal = ({ show, onClose, customer, onConfirm }) => {
       documentNumber: customer?.documentNumber || '',
       phone: customer?.phone || '',
       email: customer?.email || '',
+      address: customer?.address || '',
       active: customer?.active ?? true,
     },
     validateCustomerForm // puede ser una función dummy si aún no lo implementaste
@@ -102,6 +103,16 @@ const EditCustomerModal = ({ show, onClose, customer, onConfirm }) => {
               name="email"
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-2">
+            <label className="form-label">Domicilio</label>
+            <input
+              type="address"
+              name="address"
+              className={`form-control ${errors.address ? 'is-invalid' : ''}`}
+              value={formData.address}
               onChange={handleChange}
             />
           </div>

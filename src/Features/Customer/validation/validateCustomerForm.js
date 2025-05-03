@@ -20,6 +20,9 @@ export default function validateCustomerForm(values) {
     if (!values.phone.trim()) {
         errors.phone = 'El teléfono es obligatorio';
     }
+    if (!values.address.trim()) {
+        errors.address = 'El domicilio es obligatorio';
+    }
 
     if (!values.email.trim()) {
         errors.email = 'El email es obligatorio';

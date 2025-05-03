@@ -1,54 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import useConfirmWorkHour from "../hooks/useConfirmWorkHour";
+import useConfirmWorkHour from '../hooks/useConfirmWorkHour'
+import useConfirmHourForm from "../hooks/useConfirmHourForm";
 import EmployeeSelect from "../../../Components/Selects/EmployeeSelect";
 
 const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
   const { confirmHour, loading } = useConfirmWorkHour();
+  const {
+    form,
+    errors,
+    handleChange,
+    handleEmployeeChange,
+    validate
+  } = useConfirmHourForm(hour);
 
-  const [form, setForm] = useState({
-    newDate: "",
-    newHour: "",
-    newEmployeeId: null,
-    observation: ""
-  });
-
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
-
-  // Inicializar el form y el empleado cuando se abra el modal
-  useEffect(() => {
-    if (hour) {
-      setForm({
-        newDate: hour.date || "",
-        newHour: "",
-        newEmployeeId: hour.employeeId || null,
-        observation: ""
-      });
-
-      setSelectedEmployee({
-        value: hour.employeeId,
-        label: `${hour.employeeName} `
-      });
-    }
-  }, [hour]);
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleEmployeeChange = (selectedOption) => {
-    setSelectedEmployee(selectedOption);
-    setForm({
-      ...form,
-      newEmployeeId: selectedOption ? selectedOption.value : null
-    });
-  };
+  const selectedEmployee =
+    form.newEmployeeId && hour
+      ? { value: form.newEmployeeId, label: hour.employeeName }
+      : null;
 
   const handleSubmit = async () => {
-    if (!form.newDate || !form.newHour || !form.newEmployeeId) {
-      alert("Todos los campos son obligatorios.");
-      return;
-    }
+    if (!validate()) return;
 
     const payload = {
       workHourId: hour.id,
@@ -57,7 +29,7 @@ const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
 
     try {
       await confirmHour(payload);
-      if (onConfirmed) onConfirmed(); // para refrescar la tabla
+      if (onConfirmed) onConfirmed(); // elimina de la tabla y cierra
       onClose();
     } catch (e) {
       console.error("Error al confirmar hora:", e);
@@ -71,10 +43,16 @@ const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <EmployeeSelect
-            value={selectedEmployee}
-            onSelect={handleEmployeeChange}
-          />
+          <Form.Group className="mb-3">
+           
+            <EmployeeSelect
+              value={selectedEmployee}
+              onSelect={handleEmployeeChange}
+            />
+            {errors.newEmployeeId && (
+              <div className="text-danger mt-1">{errors.newEmployeeId}</div>
+            )}
+          </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Fecha de realización</Form.Label>
@@ -83,7 +61,11 @@ const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
               name="newDate"
               value={form.newDate}
               onChange={handleChange}
+              isInvalid={!!errors.newDate}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.newDate}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -93,7 +75,11 @@ const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
               name="newHour"
               value={form.newHour}
               onChange={handleChange}
+              isInvalid={!!errors.newHour}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.newHour}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -109,6 +95,7 @@ const ConfirmHourModal = ({ show, onClose, hour, onConfirmed }) => {
           </Form.Group>
         </Form>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
           Cancelar

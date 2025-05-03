@@ -1,6 +1,6 @@
 import { useState } from "react";
-import apiClient from "../../../services/apiClient";
-import { showSuccessAlert } from "../../../Components/Alerts/alerts";
+import apiClient from "../../../Services/apiClient";
+import { showErrorAlert, showSuccessAlert } from "../../../Components/Alerts/alerts";
 
 const useConfirmWorkHour = () => {
   const [loading, setLoading] = useState(false);
@@ -14,6 +14,7 @@ const useConfirmWorkHour = () => {
       showSuccessAlert("Exito", "La hora fue confirmada correctamente");
       return res.data;
     } catch (err) {
+      showErrorAlert("No se pudo confirmar la hora. " + err.response.data.error)
       setError("No se pudo confirmar la hora.");
       throw err;
     } finally {

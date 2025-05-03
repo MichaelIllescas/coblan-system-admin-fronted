@@ -30,6 +30,7 @@ const ListCustomersPage = () => {
     { Header: "D.N.I.", accessor: "documentNumber" },
     { Header: "Teléfono", accessor: "phone" },
     { Header: "Email", accessor: "email" },
+    { Header: "Domicilio", accessor: "address"},
     {
       Header: "Estado",
       accessor: "active",

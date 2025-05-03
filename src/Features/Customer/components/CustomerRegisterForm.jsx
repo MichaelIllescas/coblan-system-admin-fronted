@@ -10,6 +10,7 @@ const CustomerRegisterForm = ({ onSubmit }) => {
       documentNumber: "",
       phone: "",
       email: "",
+      address: "",
       active: true,
     },
     validateCustomerForm
@@ -105,6 +106,23 @@ const CustomerRegisterForm = ({ onSubmit }) => {
             name="email"
             className={`form-control ${errors.email ? "is-invalid" : ""}`}
             value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          {errors.email && (
+            <div className="invalid-feedback">{errors.email}</div>
+          )}
+        </div>
+        <div className="mb-3">
+          <label htmlFor="address" className="form-label">
+            Domicilio
+          </label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            className={`form-control ${errors.address ? "is-invalid" : ""}`}
+            value={formData.address}
             onChange={handleChange}
             required
           />

@@ -39,6 +39,7 @@ const ListHiringsPage = () => {
     { Header: "Fecha de Inicio", accessor: "startDate" },
     
     { Header: "Cliente", accessor: "customerName" },
+    {Header: "Domicilio", accessor: "customerAddress"},
     { Header: "Servicio", accessor: "serviceName" },
     { Header: "Empleado", accessor: "employeeName" },
     { Header: "Valor", accessor: "totalAmount" },
