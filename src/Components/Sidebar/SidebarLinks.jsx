@@ -87,19 +87,19 @@ export const sidebarLinks = [
     icon: <BarChart2 size={20} />,
     children: [
       {
-        path: "/reports/hiring",
-        label: "Reporte De Contrataciones",
+        path: "/reports/monthly",
+        label: "Financiero Menual",
         icon: <FileText size={18} />,
+      },
+      {
+        path: "/reports/anual",
+        label: "Financiero Anual",
+        icon: <PieChart size={18} />,
       },
       {
         path: "/reports/employees-hours",
         label: "Horas De Empleados",
         icon: <Clock size={18} />,
-      },
-      {
-        path: "/reports/financial",
-        label: "Reporte Financiero",
-        icon: <PieChart size={18} />,
       },
     ],
   },

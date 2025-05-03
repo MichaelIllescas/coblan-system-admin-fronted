@@ -68,8 +68,8 @@ const PendingWorkHoursPage = () => {
   ];
 
   return (
-    <div className="container mt-4">
-      <h3 className="mb-4">Consultar Horas Pendientes</h3>
+    <div className="container mt-1">
+      <h1 className="mb-4 text-white">Consultar Horas Pendientes</h1>
 
       <div className="row g-4">
         <div className="col-md-6">

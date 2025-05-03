@@ -57,7 +57,7 @@ const ListHiringsMonthly = () => {
 
   return (
     <div className="container">
-      <h2>Contrataciones mensuales</h2>
+      <h1 className='text-white'>Contrataciones mensuales</h1>
       <DateFilter onFilter={handleFilter} />
       {loading ? (
         <p>Cargando contrataciones...</p>

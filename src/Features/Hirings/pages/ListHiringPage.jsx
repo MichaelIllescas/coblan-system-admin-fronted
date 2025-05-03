@@ -14,7 +14,7 @@ const ListHiringsPage = () => {
   const [statusModalVisible, setStatusModalVisible] = useState(false);
   const [hiringSelected, sethiringSelected] = useState(null);
   const { handleCancel} = useCancelHiring();
-  const {workHours,loading: loadingHours, error: errorHours, fetchWorkHours} = useHiringWorkHours();
+  const {workHours, fetchWorkHours} = useHiringWorkHours();
   const [selectedHiringId, setSelectedHiringId] = useState(null);
 
   const dayLabels = {
