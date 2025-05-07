@@ -68,6 +68,8 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
                   <th>Fecha</th>
                   <th>Hora</th>
                   <th>Duración (Mins.)</th>
+                  <th>Precio</th>
+
                   <th>Tipo</th>
                   <th>Estado</th>
                   <th>Empleado</th>
@@ -80,6 +82,7 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
                     <td>{hour.date}</td>
                     <td>{hour.hour}</td>
                     <td className="text-center">{hour.duration}</td>
+                    <td className="text-center">${hour.price}</td>
                     <td>{hour.type}</td>
                     <td>
                       {hour.status === "PENDING"

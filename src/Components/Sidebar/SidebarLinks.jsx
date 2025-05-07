@@ -88,7 +88,7 @@ export const sidebarLinks = [
     children: [
       {
         path: "/reports/monthly",
-        label: "Financiero Menual",
+        label: "Financiero Mensual",
         icon: <FileText size={18} />,
       },
       {

@@ -30,6 +30,7 @@ const columns = [
   { Header: "Fecha Asignada", accessor: "date" },
   { Header: "Horario", accessor: "hour"},
   { Header: "Duración (Mins.)", accessor: "duration" },
+  {Header: "Precio", accessor:"price", Cell: ({value})=>`$${value}`},
   { Header: "Tipo", accessor: "type" },
   { Header: "Empleado Asignado", accessor: "employeeName" },
   {
