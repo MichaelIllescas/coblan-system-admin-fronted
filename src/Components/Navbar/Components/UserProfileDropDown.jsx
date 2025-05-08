@@ -39,22 +39,14 @@ const UserProfileDropDown = () => {
               Configuración
             </NavLink>
           </li>
+          <li><hr className="dropdown-divider" /></li>
           <li>
-            <NavLink className="dropdown-item" to="/cambiar-contraseña">
+            <NavLink className="dropdown-item" to="/change-password">
               Cambiar Contraseña
             </NavLink>
           </li>
-          <li>
-            <NavLink className="dropdown-item" to="/reestablecer-contraseña">
-              Reestablecer Contraseña
-            </NavLink>
-          </li>
-          <li><hr className="dropdown-divider" /></li>
-          <li>
-            <NavLink className="dropdown-item" to="/documentacion">
-              Documentación
-            </NavLink>
-          </li>
+        
+          
           <li><hr className="dropdown-divider" /></li>
           <li>
             <button className="dropdown-item" onClick={handleLogout}>

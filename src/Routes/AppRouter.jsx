@@ -23,6 +23,7 @@ import PendingWorkHoursPage from "../Features/Hirings/pages/PendingWorkHoursPage
 import AssignedHoursPage from "../Features/Reports/pages/AssignedHoursPage";
 import MonthlyReportPage from "../Features/Reports/pages/MonthlyReportPage";
 import AnnualReportPage from "../Features/Reports/pages/AnnualReportPage";
+import ChangePassword from "../Features/Users/components/ChangePassword";
 
 export const AppRoutes = () => {
   const { user } = useAuth();
@@ -86,7 +87,7 @@ export const AppRoutes = () => {
 )}
  <Route path="/users/create" element={<ProtectedRoute element={<UserRegisterPage />} />} /> 
  <Route path="/usersList" element={<ProtectedRoute element={<ListUsersPage />} />} /> 
-
+ <Route path="/change-password" element= {<ProtectedRoute element={<ChangePassword/>}/>}/>
 
 <Route path="/dashboard" element={<ProtectedRoute element={<DashboardPage/>} />} />
 
