@@ -4,6 +4,9 @@ import ServiceSelect from "../../../Components/Selects/ServiceSelect";
 import CustomerSelect from "../../../Components/Selects/CustomerSelect";
 import ScheduleSelector from "../components/ScheduleSelector";
 import useHiringForm from "../hooks/useHiringForm";
+import FullScreenLoader from "../../../Components/Loading/FullScreenLoader";
+import {formatDateToDDMMYYYY} from '../../../utils/formatDateToDDMMYYYY';
+import { daysOfWeek } from '../../../utils/dayOptions';
 
 const HiringRegisterPage = () => {
   const {
@@ -13,6 +16,7 @@ const HiringRegisterPage = () => {
     customer,
     schedule,
     errors,
+    loading,
     setStartDate,
     setEmployee,
     setService,
@@ -21,8 +25,13 @@ const HiringRegisterPage = () => {
     handleSubmit,
   } = useHiringForm();
 
+  const getDayLabel = (value) => {
+  const match = daysOfWeek.find((d) => d.value === value);
+  return match ? match.label : value;
+}; 
   return (
     <div className="container mt-2">
+      {loading && <FullScreenLoader/>}
       <div className="row">
         <div className="col-md-6">
           <div className="card shadow p-4 mb-4">
@@ -83,7 +92,7 @@ const HiringRegisterPage = () => {
           <div className="card shadow p-4">
             <h5 className="mb-3">Detalle de la Contratación</h5>
             <p>
-              <strong>Fecha de Inicio:</strong> {startDate || "No seleccionada"}
+              <strong>Fecha de Inicio:</strong> {formatDateToDDMMYYYY(startDate) || "No seleccionada"}
             </p>
             <p>
               <strong>Empleado:</strong> {employee?.label || "No seleccionado"}
@@ -102,7 +111,7 @@ const HiringRegisterPage = () => {
               <ul className="list-group">
                 {schedule.map((entry, index) => (
                   <li key={index} className="list-group-item">
-                    {entry.day} – {entry.hour}
+                    {getDayLabel(entry.day)} – {entry.hour}
                   </li>
                 ))}
               </ul>

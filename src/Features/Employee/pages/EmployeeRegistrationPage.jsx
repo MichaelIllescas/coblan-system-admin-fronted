@@ -1,12 +1,18 @@
 import React from 'react';
 import {useEmplooyeRegistration} from '../hook/useEmployeeRegister';
 import EmployeeRegisterForm from '../components/EmployeeRegisterForm';
+import FullScreenLoader from '../../../Components/Loading/FullScreenLoader';
 
 const EmployeeRegistrationPage = () => {
-    const { handleRegisterEmployee, errorMessage, successMessage } = useEmplooyeRegistration();
+    const { handleRegisterEmployee, errorMessage, successMessage , loading} = useEmplooyeRegistration();
+    {loading && <FullScreenLoader/> }
+   
+    return ( 
 
-    return (
+        
+
         <div className="container mt-4">
+             {loading && <FullScreenLoader />}
             <h2 className="text-center mb-4 text-white">Registrar Empleado</h2>
             <EmployeeRegisterForm onSubmit={handleRegisterEmployee} />
             

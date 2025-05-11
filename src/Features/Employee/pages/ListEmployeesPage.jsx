@@ -8,6 +8,7 @@ import EditEmployeeModal from "../components/EditEmployeeModal";
 import ConfirmModal from "../../../Components/Modals/ConfirmModal";
 import { FaEdit } from "react-icons/fa";
 import { MdToggleOn, MdToggleOff } from "react-icons/md";
+import FullScreenLoader from "../../../Components/Loading/FullScreenLoader";
 
 const ListEmployeesPage = () => {
   const { employees, loading, error, refetch } = useEmployeesList();
@@ -61,16 +62,17 @@ const ListEmployeesPage = () => {
       ),
     },
   ];
+ 
 
   return (
     <div className="container mt-4">
       <h2 className="text-center mb-4 text-white">Listado de Empleados</h2>
 
-      {loading && <p className="text-white text-center">Cargando...</p>}
+      {loading && <FullScreenLoader/> }
       {error && <p className="text-danger text-center">{error}</p>}
 
       {!loading && !error && (
-        <div className="m-auto table-responsive" style={{ maxWidth: "70vw" }}>
+        <div className="m-auto table-responsive" style={{ maxWidth: "80vw" }}>
           <DataTable columns={columns} data={employees} />
         </div>
       )}

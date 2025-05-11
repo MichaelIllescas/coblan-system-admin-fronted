@@ -10,7 +10,7 @@ const MonthYearSearch = ({ onSearch, children }) => {
 
   return (
     <div className="card p-4 shadow-sm">
-      <h5>Buscar por mes y año</h5>
+      <p>Buscar por mes y año</p>
       <div className="d-flex gap-2 mb-3 align-items-end">
         <select className="form-select" value={month} onChange={(e) => setMonth(e.target.value)}>
           <option value="">Mes</option>

@@ -1,11 +1,13 @@
 import React from 'react';
 import EmployeeSelect from '../../../Components/Selects/EmployeeSelect';
 import useSalaryPaymentForm from '../hooks/useSalaryPaymentForm';
+import FullScreenLoader from '../../../Components/Loading/FullScreenLoader';
 
 const SalaryPaymentForm = () => {
   const {
     formData,
     errors,
+    loading,
     handleChange,
     handleSubmit,
     handleSelectEmployee,
@@ -14,7 +16,7 @@ const SalaryPaymentForm = () => {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="card p-4 shadow-lg border-0 col-lg-6 col-sm-12 m-auto mb-3" >
-   
+    {loading && <FullScreenLoader/>}
 
       <EmployeeSelect onSelect={handleSelectEmployee}  value={selectedEmployee} />
       {errors.employeeId && <div className="text-danger">{errors.employeeId}</div>}

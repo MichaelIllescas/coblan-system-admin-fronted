@@ -29,7 +29,7 @@ export const chevronAnimation = (isOpen) => ({
 });
 
 export const arrowToggleAnimation = (isOpen) => ({  
-    rotate: isOpen ? 180 : 0,
+    rotate: isOpen ? 360 : 0,
     width: isOpen ? 60 : 40,
     transition: {duration: 0.3, ease: "easeInOut"}
 });

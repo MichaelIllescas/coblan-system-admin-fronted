@@ -50,7 +50,7 @@ style={{
   color: "#333",
 }}
 >
-Cerrando sesión...
+Cargando...
 </Motion.p>
 </Motion.div>
 );

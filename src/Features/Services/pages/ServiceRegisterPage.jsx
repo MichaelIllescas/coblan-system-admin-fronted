@@ -1,12 +1,14 @@
 import ServiceRegisterForm  from '../components/ServiceRegisterForm';
 import {useRegisterService} from '../hooks/useServiceRegister';
+import FullScreenLoader from '../../../Components/Loading/FullScreenLoader'
 
 
 const ServiceRegisterPage = () => {
-    const { handleRegisterService, errorMessage, successMessage } = useRegisterService();
+    const { handleRegisterService, errorMessage, successMessage, loading } = useRegisterService();
 
     return (
         <div className="container mt-4">
+             {loading && <FullScreenLoader />}
             <h2 className="text-center mb-4 text-white">Registrar Nuevo Servicio</h2>
             <ServiceRegisterForm  sterForm onSubmit={handleRegisterService} />
             

@@ -1,12 +1,13 @@
 import ExpenseRegisterForm from '../components/ExpenseRegisterForm';
 import {useRegisterExpense} from '../hooks/useRegisterExpense';
-
+import FullScreenLoader from '../../../Components/Loading/FullScreenLoader'
 
 const ExpenseRegisterPage = () => {
-    const { handleRegisterExpense, errorMessage, successMessage } = useRegisterExpense();
+    const { handleRegisterExpense, errorMessage, successMessage, loading } = useRegisterExpense();
 
     return (
         <div className="container mt-4">
+            {loading && <FullScreenLoader/>}
             <h2 className="text-center mb-4 text-white">Registrar Nuevo Gasto</h2>
             <ExpenseRegisterForm onSubmit={handleRegisterExpense} />
             

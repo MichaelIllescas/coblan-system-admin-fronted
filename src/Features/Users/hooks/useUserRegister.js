@@ -1,28 +1,34 @@
-import { useState } from 'react';
-import { registerUser } from '../services/userRegisterService';
-import { showSuccessAlert, showErrorAlert } from '../../../Components/Alerts/alerts';
+import { useState } from "react";
+import { registerUser } from "../services/userRegisterService";
+import {
+  showSuccessAlert,
+  showErrorAlert,
+} from "../../../Components/Alerts/alerts";
 
+export const useRegisterUser = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [loading, setloading] = useState(false);
+  const handleRegisterUser = async (formData, resetForm) => {
+    try {
+        setloading(true);
+      await registerUser(formData);
+      showSuccessAlert("Éxito", "Ususario registrado correctamente");
 
-export const useRegisterUser= () => {
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null);
+      setErrorMessage(null);
+      resetForm();
+    } catch (error) {
+      showErrorAlert("Error", error.response?.data?.error);
+      setSuccessMessage(null);
+    }finally{
+        setloading(false)
+    }
+  };
 
-    const handleRegisterUser = async (formData, resetForm) => {
-        try {
-            await registerUser(formData);
-            showSuccessAlert('Éxito', 'Ususario registrado correctamente');
-
-            setErrorMessage(null);
-            resetForm();
-        } catch (error) {
-            showErrorAlert('Error', error.response?.data?.error)
-            setSuccessMessage(null);
-        }
-    };
-
-    return {
-        handleRegisterUser,
-        errorMessage,
-        successMessage,
-    };
+  return {
+    handleRegisterUser,
+    errorMessage,
+    successMessage,
+    loading
+  };
 };

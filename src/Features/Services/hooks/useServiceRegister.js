@@ -5,9 +5,11 @@ import { showErrorAlert, showSuccessAlert } from '../../../Components/Alerts/ale
 export const useRegisterService = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
+    const [loading, setloading] = useState(false);
 
     const handleRegisterService = async (formData, resetForm) => {
         try {
+            setloading(true);
             await registerService(formData);
             showSuccessAlert('Éxito', 'Servicio registrado correctamente');
             setErrorMessage(null);
@@ -18,6 +20,8 @@ export const useRegisterService = () => {
             setErrorMessage(error.response?.data?.error || 'Ocurrió un error');
             showErrorAlert(errorMessage);
             setSuccessMessage(null);
+        }finally{
+             setloading(false);
         }
     };
 
@@ -25,5 +29,6 @@ export const useRegisterService = () => {
         handleRegisterService,
         errorMessage,
         successMessage,
+        loading
     };
 };

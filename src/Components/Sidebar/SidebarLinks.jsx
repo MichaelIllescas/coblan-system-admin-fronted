@@ -15,8 +15,13 @@ import {
   Ban,
   Clock,
 } from "lucide-react";
+import { useAuth } from "../../Context/AuthContext";
 
-export const sidebarLinks = [
+
+export const useSidebarLinks = () => {
+  const { user } = useAuth();
+  const role = user?.role; 
+  return  [
   {
     label: "Clientes",
     icon: <Users size={20} />,
@@ -137,20 +142,27 @@ export const sidebarLinks = [
       },
     ],
   },
-  {
-    label: "Usuarios",
-    icon: <UserCircle2 size={20} />,
-    children: [
-      {
-        path: "/users/create",
-        label: "Crear Usuario",
-        icon: <UserPlus size={18} />,
-      },
-      { path: "/usersList", label: "Lisado De Usuarios", icon: <List size={18} /> },
-     
-    ],
-  },
+  ...(role === 'ADMIN'
+    ? [
+        {
+          label: "Usuarios",
+          icon: <UserCircle2 size={20} />,
+          children: [
+            {
+              path: "/users/create",
+              label: "Crear Usuario",
+              icon: <UserPlus size={18} />,
+            },
+            {
+              path: "/usersList",
+              label: "Listado De Usuarios",
+              icon: <List size={18} />,
+            },
+          ],
+        },
+      ]
+    : []),
 ];
 
-
+}
 

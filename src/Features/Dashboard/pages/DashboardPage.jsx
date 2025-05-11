@@ -8,7 +8,7 @@ const DashboardPage = () => {
   const { user } = useAuth();
   return (
     <div className="container mt-4">
-      <h1 className="text-white mb-4 fst-italic">Bienvenido {user.name}</h1>
+      <h1 className="text-white mb-4 fst-italic">Bienvenido {user.firstName}</h1>
       <div className="col-12 d-flex gap-3 flex-wrap mb-3">
         <div className="col-lg-5 col-sm-10 ">
           <MonthlyProfitChart />

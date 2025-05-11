@@ -6,6 +6,7 @@
     padding: 15px 0;  /* Espaciado */
     text-align: center;  /* Centrado */
     width: 100%;  /* El footer ocupa todo el ancho */
- 
+    position: sticky  ;
+    bottom: 0;
   }
   

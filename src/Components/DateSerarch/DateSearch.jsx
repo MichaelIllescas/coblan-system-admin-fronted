@@ -9,7 +9,7 @@ const DateSearch = ({ onSearch, children }) => {
 
   return (
     <div className="card p-4 shadow-sm">
-      <h5>Buscar por fecha</h5>
+      <p>Buscar por fecha</p>
       <div className="d-flex gap-2 mb-3 align-items-end">
         <input
           type="date"

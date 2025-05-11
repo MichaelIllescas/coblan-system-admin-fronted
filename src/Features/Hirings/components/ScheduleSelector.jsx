@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
-const daysOfWeek = [
-  { label: 'Lunes', value: 'MONDAY' },
-  { label: 'Martes', value: 'TUESDAY' },
-  { label: 'Miércoles', value: 'WEDNESDAY' },
-  { label: 'Jueves', value: 'THURSDAY' },
-  { label: 'Viernes', value: 'FRIDAY' },
-  { label: 'Sábado', value: 'SATURDAY' },
-  { label: 'Domingo', value: 'SUNDAY' },
-];
+import { daysOfWeek } from '../../../utils/dayOptions'; 
 
 const ScheduleSelector = ({ onChange, value = [] }) => {
   const [entries, setEntries] = useState(value.length > 0 ? value : [{ day: '', hour: '' }]);
 
-  // Cuando se actualiza desde el hook, reseteamos visualmente
   useEffect(() => {
     setEntries(value.length > 0 ? value : [{ day: '', hour: '' }]);
   }, [value]);

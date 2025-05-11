@@ -5,6 +5,7 @@ import salaryPaymentService from '../services/salaryPaymentService';
 import { showErrorAlert, showSuccessAlert } from '../../../Components/Alerts/alerts';
 
 const useSalaryPaymentForm = () => {
+  const [loading, setloading] = useState(false);
   const initialValues = {
     amount: '',
     paymentDate: '',
@@ -34,7 +35,9 @@ const useSalaryPaymentForm = () => {
       employeeId: selectedEmployee?.value
     };
 
+
     try {
+      setloading(true);
       await salaryPaymentService.createSalaryPayment(payload);
       showSuccessAlert("Éxito", "Pago de salario registrado exitosamente");
 
@@ -45,11 +48,16 @@ const useSalaryPaymentForm = () => {
       const message = error?.response?.data?.error || "Error al registrar el pago del salario";
       showErrorAlert("Error", message);
     }
+    finally{
+            setloading(false);
+
+    }
   });
 
   return {
     formData,
     errors,
+    loading,
     handleChange,
     handleSubmit,
     resetForm: () => {

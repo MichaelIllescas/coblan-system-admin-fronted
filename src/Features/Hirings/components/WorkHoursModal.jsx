@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Button, Table, Pagination } from "react-bootstrap";
+import {formatDateToDDMMYYYY} from  '../../../utils/formatDateToDDMMYYYY'
 
 const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -79,7 +80,7 @@ const WorkHoursModal = ({ show, onClose, workHours = [], hiringId }) => {
               <tbody>
                 {currentItems.map((hour) => (
                   <tr key={hour.id}>
-                    <td>{hour.date}</td>
+                    <td>{formatDateToDDMMYYYY(hour.date)}</td>
                     <td>{hour.hour}</td>
                     <td className="text-center">{hour.duration}</td>
                     <td className="text-center">${hour.price}</td>

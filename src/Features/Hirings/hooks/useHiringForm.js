@@ -11,6 +11,7 @@ export default function useHiringForm() {
   const [customer, setCustomer] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [errors, setErrors] = useState({});
+  const [loading, setloading] = useState(false);
 
   const handleSubmit = async () => {
     const validationErrors = validateHiringForm({ startDate, employee, service, customer, schedule });
@@ -29,6 +30,7 @@ export default function useHiringForm() {
     };
 
     try {
+      setloading(true);
       await hiringService.createHiring(payload);
       showSuccessAlert('Éxito', 'Contratacion registrada correctamente');
       setStartDate('');
@@ -41,6 +43,8 @@ export default function useHiringForm() {
     } catch (error) {
       showErrorAlert(error.response?.data?.error || 'Ocurrió un error')
       
+    } finally{
+      setloading(false);
     }
   };
 
@@ -51,6 +55,7 @@ export default function useHiringForm() {
     customer,
     schedule,
     errors,
+    loading,
     setStartDate,
     setEmployee,
     setService,

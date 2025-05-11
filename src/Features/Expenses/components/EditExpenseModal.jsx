@@ -2,7 +2,7 @@ import React from 'react';
 import GenericModal from '../../../Components/Modals/GenericModal';
 import useForm from '../../../hooks/useForm';
 import validateExpenseForm from '../validations/validateExpenseForm'; 
-
+import {formatDateToDDMMYYYY} from '../../../utils/formatDateToDDMMYYYY';
 const EditExpenseModal = ({ show, onClose, expense, onConfirm }) => {
   const {
     formData,
@@ -45,10 +45,10 @@ const EditExpenseModal = ({ show, onClose, expense, onConfirm }) => {
         <div className="col-md-6 border-end">
           <h6>Actual</h6>
           <p><strong>Nombre:</strong> {expense?.name}</p>
-          <p><strong>Apellido:</strong> {expense?.description}</p>
-          <p><strong>DNI:</strong> {expense?.amount}</p>
-          <p><strong>Teléfono:</strong> {expense?.date}</p>
-          <p><strong>Email:</strong> {expense?.notes}</p>
+          <p><strong>Descripción:</strong> {expense?.description}</p>
+          <p><strong>Monto: $</strong> {expense?.amount}</p>
+          <p><strong>Fecha:</strong> {formatDateToDDMMYYYY(expense?.date)}</p>
+          <p><strong>Notas:</strong> {expense?.notes}</p>
        
         </div>
 
@@ -66,7 +66,19 @@ const EditExpenseModal = ({ show, onClose, expense, onConfirm }) => {
             />
           </div>
           <div className="mb-2">
-            <label className="form-label">Descripción</label>
+                      <label className="form-label">Descripción</label>
+                      <input
+                        type="text"
+                        name="description"
+                        className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+                        value={formData.description}
+                        onChange={handleChange}
+                      />
+             </div>
+
+
+          <div className="mb-2">
+            <label className="form-label">Monto</label>
             <input
               type="number"
               name="amount"

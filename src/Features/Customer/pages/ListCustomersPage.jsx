@@ -10,7 +10,6 @@ import ConfirmDeleteModal from "../../../Components/Modals/ConfirmDeleteModal";
 import { useState } from "react";
 import useConfirmCustomerDelete from "../hooks/useConfirmCustomerDelete";
 
-
 const ListCustomersPage = () => {
   const { customers, loading, error, refetch } = useCustomerList();
   const { selectedItem, modalVisible, openModal, closeModal } = useEditModal();
@@ -30,7 +29,7 @@ const ListCustomersPage = () => {
     { Header: "D.N.I.", accessor: "documentNumber" },
     { Header: "Teléfono", accessor: "phone" },
     { Header: "Email", accessor: "email" },
-    { Header: "Domicilio", accessor: "address"},
+    { Header: "Domicilio", accessor: "address" },
     {
       Header: "Estado",
       accessor: "active",
@@ -71,11 +70,10 @@ const ListCustomersPage = () => {
       {error && <p className="text-danger text-center">{error}</p>}
 
       {!loading && !error && (
-        <div className="m-auto table-responsive" style={{ maxWidth: "70vw" }}>
+        <div className="m-auto table-responsive" style={{ maxWidth: "80vw" }}>
           <DataTable columns={columns} data={customers} />
         </div>
       )}
-
 
       <EditCustomerModal
         show={modalVisible}

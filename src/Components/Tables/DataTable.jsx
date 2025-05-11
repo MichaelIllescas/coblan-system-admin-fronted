@@ -62,7 +62,8 @@ function DataTable({ columns, data }) {
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
-                    key={column.id}
+                      key={column.id || column.Header}
+
                     className="text-center align-middle"
                   >
                     {column.render("Header")}

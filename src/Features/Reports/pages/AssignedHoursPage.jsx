@@ -3,6 +3,7 @@ import EmployeeSelect from "../../../Components/Selects/EmployeeSelect";
 import MonthYearSearch from "../../../Components/DateSerarch/MonthYearSearch";
 import DataTable from "../../../Components/Tables/DataTable";
 import useAssignedHoursByEmployee from "../hooks/useAssignedHoursByEmployee";
+import { formatDateToDDMMYYYY } from "../../../utils/formatDateToDDMMYYYY";
 
 const AssignedHoursPage = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -36,13 +37,13 @@ const AssignedHoursPage = () => {
 
   const columns = [
     { Header: "ID", accessor: "id" },
-    { Header: "Fecha", accessor: "date" },
-    { Header: "Cliente", accessor: "customerName" },
     { Header: "Empleado", accessor: "employeeName" },
+    { Header: "Cliente", accessor: "customerName" },
+    { Header: "Fecha", accessor: "date", Cell: ({value})=> formatDateToDDMMYYYY(value) },
     {
       Header: "Fecha de realización",
       accessor: "confirmationDate",
-      Cell: ({ value }) => (value == null ? "---" : value),
+      Cell: ({ value }) => (value == null ? "---" : formatDateToDDMMYYYY(value)),
     },
     {
       Header: "Hora de realización",
@@ -70,9 +71,12 @@ const AssignedHoursPage = () => {
   return (
     <div className="container mt-1">
       <h1 className="mb-4 text-white">Horas asignadas por empleado</h1>
+         <p className="mb-4 text-white">
+          ✅En este apartado puede listar las horasmenusales pendientes y confirmadas de cada empleado
+          </p>
 
       <div className="row g-4 mb-4">
-        <div className="col-md-6">
+        <div className="col-md-6 card p-4 shadow-sm ">
           <EmployeeSelect
             value={selectedEmployee}
             onSelect={handleEmployeeChange}

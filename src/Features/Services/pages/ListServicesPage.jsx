@@ -8,11 +8,11 @@ import ConfirmDeleteModal from "../../../Components/Modals/ConfirmDeleteModal";
 import useEditModal from "../../../hooks/useEditModal";
 import useServiceUpdate from "../hooks/useServiceUpdate";
 import EditServiceModal from "../components/EditServiceModal";
-
+import FullScreenLoader from "../../../Components/Loading/FullScreenLoader";
 const ListServicesPage = () => {
   const { services, loading, error, refetch } = useServicesList();
   const { selectedItem, modalVisible, openModal, closeModal } = useEditModal();
-  const { handleUpdate, loading: updating } = useServiceUpdate();
+  const { handleUpdate,  } = useServiceUpdate();
 
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [serviceToDelete, setServiceToDelete] = useState(null);
@@ -57,11 +57,11 @@ const ListServicesPage = () => {
     <div className="container mt-4">
       <h2 className="text-center mb-4 text-white">Listado de Servicios</h2>
 
-      {loading && <p className="text-white text-center">Cargando...</p>}
+      {loading && <FullScreenLoader />}
       {error && <p className="text-danger text-center">{error}</p>}
 
       {!loading && !error && (
-        <div className="m-auto table-responsive" style={{ maxWidth: "70vw" }}>
+        <div className="m-auto table-responsive" style={{ maxWidth: "80vw" }}>
           <DataTable columns={columns} data={services} />
         </div>
       )}

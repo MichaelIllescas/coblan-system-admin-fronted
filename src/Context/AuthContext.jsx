@@ -6,10 +6,38 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
+export const checkSession = async ({ setUser, setSessionExpired, navigate, location }) => {
+  const publicPrefixes = ["/login", "/forgotPassword", "/reset-password"];
+
+  // Usamos startsWith con pathname para admitir tokens, etc.
+  const isPublicRoute = publicPrefixes.some((prefix) =>
+    location.pathname.startsWith(prefix)
+  );
+
+  try {
+    const userData = await getSession();
+
+    if (userData) {
+      setUser(userData);
+    } else if (!isPublicRoute) {
+      setUser(null);
+      setSessionExpired(true);
+
+      setTimeout(() => {
+        setSessionExpired(false);
+        navigate("/login", { replace: true });
+      }, 3000);
+    }
+  } catch {
+    setUser(null);
+  }
+};
+
+
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [animationFinished, setAnimationFinished] = useState(false);
   const [sessionExpired, setSessionExpired] = useState(false);
 
   const navigate = useNavigate();
@@ -18,44 +46,22 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let isMounted = true;
 
-    const checkSession = async () => {
-      try {
-        const userData = await getSession();
-        if (isMounted) {
-          if (userData) {
-            setUser(userData);
-          } else if (user && location.pathname !== "/login") {
-            setSessionExpired(true);
-
-            // Espera 3 segundos mostrando el modal, luego limpia y redirige
-            setTimeout(() => {
-              setUser(null); // Limpia el usuario local
-              setSessionExpired(false); // Cierra modal
-              navigate("/login", { replace: true }); // Redirige sin repetir historial
-            }, 3000);
-          }
-        }
-      } catch {
-        if (isMounted) {
-          setUser(null);
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
+    const wrappedCheckSession = async () => {
+      if (!isMounted) return;
+      await checkSession({ setUser, setSessionExpired, navigate, location });
+      if (isMounted) setLoading(false);
     };
 
-    checkSession(); // Ejecuta al montar
+    wrappedCheckSession(); // Ejecutar al montar
 
-    const interval = setInterval(checkSession, 60000); // Ejecuta cada minuto
+    const interval = setInterval(wrappedCheckSession, 60000); // Cada 1 min
     return () => {
       isMounted = false;
       clearInterval(interval);
     };
-  }, [navigate, location.pathname]); // 👈 user ya no es dependencia
+  }, [navigate, location.pathname]);
 
-  // 🔹 Función para iniciar sesión manualmente
+  // 🔹 Función de login manual
   const loginUser = async (email, password) => {
     const userData = await login(email, password);
     setUser(userData);
@@ -63,23 +69,20 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
-
   return (
-    <AuthContext.Provider value={{ user, loading, loginUser }}>
-      {/* 🔹 Modal de sesión expirada */}
+    <AuthContext.Provider value={{ user, loading, loginUser, setUser }}>
       <Modal show={sessionExpired} centered>
         <Modal.Body className="text-center">
           <h5>Sesión expirada</h5>
           <p>Tu sesión ha expirado. Serás redirigido al inicio de sesión.</p>
         </Modal.Body>
       </Modal>
-
       {children}
     </AuthContext.Provider>
   );
 };
 
-// 🔹 Hook para usar el contexto
+// 🔹 Hook para consumir el contexto
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
