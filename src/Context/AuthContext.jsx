@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const AuthContext = createContext(null);
 
 export const checkSession = async ({ setUser, setSessionExpired, navigate, location }) => {
+  
   const publicPrefixes = ["/login", "/forgotPassword", "/reset-password"];
 
   // Usamos startsWith con pathname para admitir tokens, etc.

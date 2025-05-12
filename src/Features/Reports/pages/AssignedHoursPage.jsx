@@ -4,6 +4,7 @@ import MonthYearSearch from "../../../Components/DateSerarch/MonthYearSearch";
 import DataTable from "../../../Components/Tables/DataTable";
 import useAssignedHoursByEmployee from "../hooks/useAssignedHoursByEmployee";
 import { formatDateToDDMMYYYY } from "../../../utils/formatDateToDDMMYYYY";
+import '../styles/styles.css'
 
 const AssignedHoursPage = () => {
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -76,7 +77,7 @@ const AssignedHoursPage = () => {
           </p>
 
       <div className="row g-4 mb-4">
-        <div className="col-md-6 card p-4 shadow-sm ">
+        <div className="col-md-6 rounded  bg-gray p-4 shadow-sm ">
           <EmployeeSelect
             value={selectedEmployee}
             onSelect={handleEmployeeChange}

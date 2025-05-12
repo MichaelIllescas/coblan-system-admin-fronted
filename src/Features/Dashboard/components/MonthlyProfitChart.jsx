@@ -8,8 +8,10 @@ import {
   PointElement,
   Tooltip,
   Legend,
+  BarController,
+  LineController
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import useAnnualProfits from '../../Reports/hooks/useAnnualProfits';
 import FullScreenLoader from '../../../Components/Loading/FullScreenLoader';
 
@@ -20,7 +22,9 @@ ChartJS.register(
   LineElement,
   PointElement,
   Tooltip,
-  Legend
+  Legend,
+  BarController,   // ✅ Ahora sí están registrados
+  LineController   // ✅ También
 );
 
 const labels = [
@@ -36,8 +40,7 @@ const MonthlyProfitChart = () => {
     fetchAnnualProfits(currentYear);
   }, []);
 
-  // Convertir objeto { "Enero": 0, ... } a array ordenado
-  const profitsArray = labels.map((mes) => profits[mes] ?? 0);
+  const profitsArray = labels.map((mes) => profits?.[mes] ?? 0);
 
   const data = {
     labels,
@@ -55,6 +58,8 @@ const MonthlyProfitChart = () => {
         borderColor: 'rgb(235, 54, 199)',
         borderWidth: 2,
         fill: false,
+        tension: 0.3,
+        pointBackgroundColor: 'rgb(235, 54, 199)',
       }
     ],
   };
@@ -87,15 +92,13 @@ const MonthlyProfitChart = () => {
 
   return (
     <div className="card p-3 shadow-lg bg-light">
-      <h5 className="mb-3 text-center">Ganancias  – {currentYear}</h5>
-      
+      <h5 className="mb-3 text-center">Ganancias – {currentYear}</h5>
+
       {loading && <FullScreenLoader />}
       {error && <div className="alert alert-danger">{error}</div>}
-      {!loading && !error && (
-        <Chart type="bar" data={data} options={options} />
-      )}
+      {!loading && !error && <Bar data={data} options={options} />}
     </div>
   );
 };
 
-export default MonthlyProfitChart;  
+export default MonthlyProfitChart;

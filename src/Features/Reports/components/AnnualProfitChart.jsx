@@ -9,8 +9,10 @@ import {
   PointElement,
   Tooltip,
   Legend,
+  BarController,
+  LineController
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -19,7 +21,9 @@ ChartJS.register(
   LineElement,
   PointElement,
   Tooltip,
-  Legend
+  Legend,
+  BarController,
+  LineController // ✅ necesarios para gráficos mixtos
 );
 
 const AnnualProfitChart = ({ profits }) => {
@@ -30,8 +34,7 @@ const AnnualProfitChart = ({ profits }) => {
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
 
-  const values = labels.map(label => profits[label] ?? 0);
-
+  const values = labels.map(label => profits?.[label] ?? 0);
   const total = values.reduce((sum, value) => sum + value, 0);
 
   const data = {
@@ -50,6 +53,8 @@ const AnnualProfitChart = ({ profits }) => {
         borderColor: 'rgb(235, 54, 199)',
         borderWidth: 2,
         fill: false,
+        tension: 0.3,
+        pointBackgroundColor: 'rgb(235, 54, 199)',
       }
     ],
   };
@@ -62,16 +67,10 @@ const AnnualProfitChart = ({ profits }) => {
     },
     scales: {
       x: {
-        title: {
-          display: true,
-          text: 'Mes',
-        },
+        title: { display: true, text: 'Mes' },
       },
       y: {
-        title: {
-          display: true,
-          text: 'Ganancia ($)',
-        },
+        title: { display: true, text: 'Ganancia ($)' },
         beginAtZero: true,
       },
     },
@@ -82,7 +81,7 @@ const AnnualProfitChart = ({ profits }) => {
       <h5 className="mb-3">Ganancias Anuales</h5>
 
       {/* Gráfico */}
-      <Chart type="bar" data={data} options={options} />
+      <Bar data={data} options={options} /> {/* ✅ cambiado Chart por Bar */}
 
       {/* Resumen textual */}
       <div className="mt-4">

@@ -6,10 +6,11 @@ import {
   BarElement,
   Tooltip,
   Legend,
+  BarController // ✅ necesario para asegurar compatibilidad en prod
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2'; // ✅ usamos Bar directamente
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, BarController); // ✅ incluido
 
 const MonthlyReportChart = ({ report }) => {
   if (!report) return null;
@@ -52,49 +53,48 @@ const MonthlyReportChart = ({ report }) => {
           label: (context) =>
             `${context.label}: $${context.parsed.y.toLocaleString()}`,
         },
-        backgroundColor: '#21252    9',
+        backgroundColor: '#212529',
         titleColor: '#fff',
         bodyColor: '#fff',
       },
     },
     scales: {
-        x: {
-            grid: { display: false },
-            ticks: {
-              font: { size: 16, weight: 'bold' },
-              color: '#333',
-            },
+      x: {
+        grid: { display: false },
+        ticks: {
+          font: { size: 16, weight: 'bold' },
+          color: '#333',
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: (context) => {
+            return context.tick.value === 0 ? '#000' : '#eee';
           },
-        y: {
-          beginAtZero: true,
-          grid: {
-            color: (context) => {
-              return context.tick.value === 0 ? '#000' : '#eee'; 
-            },
-            lineWidth: (context) => {
-              return context.tick.value === 0 ? 2 : 1;
-            }
+          lineWidth: (context) => {
+            return context.tick.value === 0 ? 2 : 1;
           },
-          ticks: {
-            callback: (value) => `$${value}`,
-            font: { size: 16 },
-            color: '#555',
-          },
-          title: {
-            display: true,
-            text: 'Montos ($)',
-            color: '#666',
-            font: { size: 14 },
-          },
-        }
-      }
-      
+        },
+        ticks: {
+          callback: (value) => `$${value}`,
+          font: { size: 16 },
+          color: '#555',
+        },
+        title: {
+          display: true,
+          text: 'Montos ($)',
+          color: '#666',
+          font: { size: 14 },
+        },
+      },
+    },
   };
 
   return (
     <div className="card p-4 shadow-sm mt-4">
       <h5 className="mb-4">Distribución Financiera del Mes</h5>
-      <Chart type="bar" data={data} options={options} />
+      <Bar data={data} options={options} /> {/* ✅ reemplazado */}
     </div>
   );
 };

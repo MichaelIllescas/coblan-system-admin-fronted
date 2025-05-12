@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 import LoginPage from "../Features/Auth/Pages/LoginPage";
 import { ProtectedRoute } from "../Routes/ProtectedRoute";
-import DashboardPage from "../Features/Dashboard/pages/DashboardPage";
+import DashboardPage from '../../src/Features/Dashboard/pages/DashboardPage';
 import RegisterCustomerPage from "../Features/Customer/pages/RegisterCustomerPage";
 import EmployeeRegistrationPage from "../Features/Employee/pages/EmployeeRegistrationPage";
 import ExpenseRegisterPage from "../Features/Expenses/pages/ExpenseRegisterPage";
@@ -27,138 +27,227 @@ import ChangePassword from "../Features/Users/components/ChangePassword";
 import ConfigurationPerfilPage from "../Features/Users/pages/ConfigurationPerfilPage";
 import ForgotPassword from "../Features/Auth/Pages/ForgotPassword";
 import ResetPassword from '../Features/Auth/Pages/ResetPassword';
+
 export const AppRoutes = () => {
   const { user } = useAuth();
   const role = user?.role;
+
   return (
     <Routes>
-      {/* Ruta pública para el login */}
-      <Route path="/login" element={<LoginPage />} />
-      {/* Ruta pública para landing page */}
+      {/* Públicas */}
       <Route path="/" element={<LoginPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgotPassword" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
-      {/* Rutas protegidas dentro de MainLayout */}
+      {/* Protegidas */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configuration"
+        element={
+          <ProtectedRoute>
+            <ConfigurationPerfilPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/change-password"
+        element={
+          <ProtectedRoute>
+            <ChangePassword />
+          </ProtectedRoute>
+        }
+      />
 
-      {/* customers */}
+      {/* Customers */}
       <Route
         path="/customerRegister"
-        element={<ProtectedRoute element={<RegisterCustomerPage />} />}
+        element={
+          <ProtectedRoute>
+            <RegisterCustomerPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/customersList"
-        element={<ProtectedRoute element={<ListCustomersPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListCustomersPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* emplooyes */}
+      {/* Employees */}
       <Route
         path="/employeeRegister"
-        element={<ProtectedRoute element={<EmployeeRegistrationPage />} />}
+        element={
+          <ProtectedRoute>
+            <EmployeeRegistrationPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/employeesList"
-        element={<ProtectedRoute element={<ListEmployeesPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListEmployeesPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* expenses */}
+      {/* Expenses */}
       <Route
         path="/expenses/create"
-        element={<ProtectedRoute element={<ExpenseRegisterPage />} />}
+        element={
+          <ProtectedRoute>
+            <ExpenseRegisterPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/expensesList"
-        element={<ProtectedRoute element={<ListExpensesPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListExpensesPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* services */}
+      {/* Services */}
       <Route
         path="/services/create"
-        element={<ProtectedRoute element={<ServiceRegisterPage />} />}
+        element={
+          <ProtectedRoute>
+            <ServiceRegisterPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/servicesList"
-        element={<ProtectedRoute element={<ListServicesPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListServicesPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* salarys */}
+      {/* Salarys */}
       <Route
         path="/salary/register"
-        element={<ProtectedRoute element={<RegisterSalaryPaymentPage />} />}
+        element={
+          <ProtectedRoute>
+            <RegisterSalaryPaymentPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/salary/list"
-        element={<ProtectedRoute element={<ListSalaryPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListSalaryPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* hirings */}
+      {/* Hirings */}
       <Route
         path="/hiring/register"
-        element={<ProtectedRoute element={<HiringRegisterPage />} />}
+        element={
+          <ProtectedRoute>
+            <HiringRegisterPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/hiring/list"
-        element={<ProtectedRoute element={<ListHiringsPage />} />}
+        element={
+          <ProtectedRoute>
+            <ListHiringsPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/hiring/listMonthly"
-        element={<ProtectedRoute element={<ListHiringsMontly />} />}
+        element={
+          <ProtectedRoute>
+            <ListHiringsMontly />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/hirings/:hiringId/hours"
-        element={<ProtectedRoute element={<WorkHoursPage />} />}
+        element={
+          <ProtectedRoute>
+            <WorkHoursPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/hiring/pending-hours"
-        element={<ProtectedRoute element={<PendingWorkHoursPage />} />}
+        element={
+          <ProtectedRoute>
+            <PendingWorkHoursPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* reports */}
+      {/* Reports */}
       <Route
         path="/reports/employees-hours"
-        element={<ProtectedRoute element={<AssignedHoursPage />} />}
+        element={
+          <ProtectedRoute>
+            <AssignedHoursPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/reports/monthly"
-        element={<ProtectedRoute element={<MonthlyReportPage />} />}
+        element={
+          <ProtectedRoute>
+            <MonthlyReportPage />
+          </ProtectedRoute>
+        }
       />
       <Route
         path="/reports/anual"
-        element={<ProtectedRoute element={<AnnualReportPage />} />}
+        element={
+          <ProtectedRoute>
+            <AnnualReportPage />
+          </ProtectedRoute>
+        }
       />
 
-      {/* users managenent */}
-
+      {/* Solo ADMIN */}
       {role === "ADMIN" && (
         <>
           <Route
             path="/users/create"
-            element={<ProtectedRoute element={<UserRegisterPage />} />}
+            element={
+              <ProtectedRoute>
+                <UserRegisterPage />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/usersList"
-            element={<ProtectedRoute element={<ListUsersPage />} />}
+            element={
+              <ProtectedRoute>
+                <ListUsersPage />
+              </ProtectedRoute>
+            }
           />
         </>
       )}
-      <Route
-        path="/change-password"
-        element={<ProtectedRoute element={<ChangePassword />} />}
-      />
 
-      <Route
-        path="/dashboard"
-        element={<ProtectedRoute element={<DashboardPage />} />}
-      />
-      <Route
-        path="/configuration"
-        element={<ProtectedRoute element={<ConfigurationPerfilPage />} />}
-      />
-
-      {/* Redirigir cualquier ruta desconocida a "/login" */}
-      <Route path="/forgotPassword" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-
+      {/* Catch all */}
       <Route path="*" element={<LoginPage />} />
-
     </Routes>
   );
 };

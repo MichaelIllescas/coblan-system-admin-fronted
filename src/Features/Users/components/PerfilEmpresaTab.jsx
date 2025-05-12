@@ -2,19 +2,28 @@ import React, { useState, useEffect } from "react";
 import useCompany from "../hooks/useCompany";
 import CompanyRegisterForm from "../components/CompanyRegisterForm";
 import CompanyDetails from "../components/CompanyDetails";
+import FullScreenLoader from "../../../Components/Loading/FullScreenLoader";
 
-const PerfilEmpresaTab = ({company}) => {
-  const {loading, notFound, refresh } = useCompany();
+const PerfilEmpresaTab = ({ refreshTrigger, setRefreshTrigger }) => {
+  const { company, loading, notFound, refresh } = useCompany();
   const [companyCreated, setCompanyCreated] = useState(false);
 
   useEffect(() => {
     if (companyCreated) {
       refresh();
-      setCompanyCreated(false); // reseteamos bandera
+      setCompanyCreated(false);
     }
   }, [companyCreated]);
 
-  {loading && <FullScreenLoader/> }
+  useEffect(() => {
+    if (refreshTrigger) {
+      refresh();
+      setRefreshTrigger(false);
+    }
+  }, [refreshTrigger, setRefreshTrigger]);
+
+  if (loading) return <FullScreenLoader />;
+
   return (
     <>
       {notFound ? (
