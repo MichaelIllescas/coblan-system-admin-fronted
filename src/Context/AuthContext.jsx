@@ -8,7 +8,7 @@ const AuthContext = createContext(null);
 
 export const checkSession = async ({ setUser, setSessionExpired, navigate, location }) => {
   
-  const publicPrefixes = ["/login", "/forgotPassword", "/reset-password"];
+  const publicPrefixes = ["","/login", "/forgotPassword", "/reset-password"];
 
   // Usamos startsWith con pathname para admitir tokens, etc.
   const isPublicRoute = publicPrefixes.some((prefix) =>
