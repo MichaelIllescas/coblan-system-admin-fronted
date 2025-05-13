@@ -1,0 +1,13 @@
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+  }
+  
+  .table-container table {
+    min-width: 600px;
+  }
+  
+
+  .btn-action, .input-filter{
+    box-shadow: 1px 1px 3px 1px rgb(62, 156, 179);
+  }

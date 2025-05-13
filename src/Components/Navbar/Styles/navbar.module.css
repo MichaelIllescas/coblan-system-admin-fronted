@@ -1,0 +1,59 @@
+body {
+  background-color: #D4D4D6 !important;
+}
+
+.navbarCustom {
+  background-color: #334170 !important;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.logoText {
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  margin-left: 0.5rem;
+}
+
+.dropdownAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.5rem;
+}
+
+.dropdownAvatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #6c757d; /* gris Bootstrap */
+  margin-right: 0.5rem;
+}
+
+.dropdownButton {
+  display: flex;
+  align-items: center;
+}
+
+.dropdownButtonText {
+  color: white !important;
+  font-weight: 600;
+}
+
+.dropdownAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
